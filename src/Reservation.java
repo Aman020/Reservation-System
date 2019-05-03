@@ -50,6 +50,22 @@ public class Reservation {
         return reservationList;
     }
 
+    private Date getReservationTime() {
+        
+        
+        Calendar reservationTime = Calendar.getInstance();
+        
+        Random random = new Random();
+        
+        // reservation time 5 minustes before current time
+        if(random.nextBoolean()) reservationTime.add(Calendar.MINUTE, -5);
+        // reservation time 11 minustes before current time
+        else reservationTime.add(Calendar.MINUTE, -11);
+
+        
+        return reservationTime.getTime();
+    }
+
 
 }
 
