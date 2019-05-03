@@ -19,6 +19,8 @@ public class Reservation {
 
     public static void main(String [] args)
     {
+        Reservation reservation = new Reservation();
+       List<ReservationData> resData = reservation.getDummyReservations(0,4);
         JFrame frame = new JFrame("Reservation");
         frame.setContentPane(new Reservation().reservationPanel);
         frame.setVisible(true);
@@ -26,10 +28,10 @@ public class Reservation {
     }
 
 
-    private List<ReservationData> getDummyReservations( int noOfReservations)
+    private List<ReservationData> getDummyReservations(int minimum, int maximum)
     {
         Random random = new Random();
-        int randomNo = random.nextInt((4-0) +1) + 0;
+        int randomNo = random.nextInt((maximum-minimum) +1) + minimum;
 
         List<ReservationData> reservationList = new ArrayList<>();
         for(int i =0; i < randomNo ;i++)
@@ -40,6 +42,7 @@ public class Reservation {
             rs.question = "This is the sample question" + i ;
             rs.status = Status.PRESENT;
             rs.student = new Student("student_" + i + "@buffalo.edu", null);
+
 
         }
 
