@@ -10,6 +10,7 @@
       <component id="5aecb" class="javax.swing.JButton" binding="btnAbsent">
         <constraints/>
         <properties>
+          <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
           <text value="Absent"/>
         </properties>
@@ -20,6 +21,10 @@
           <horizontalTextPosition value="0"/>
           <text value="Present"/>
         </properties>
+      </component>
+      <component id="e2ae7" class="javax.swing.JTextArea" binding="reservationText">
+        <constraints/>
+        <properties/>
       </component>
     </children>
   </grid>
