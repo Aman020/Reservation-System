@@ -32,13 +32,13 @@ public class Reservation extends JFrame implements ActionListener {
         LocalDateTime reservationTime = LocalDateTime.ofInstant(  currentReservation.startTime.toInstant(), ZoneId.systemDefault());
 
         Duration duration = Duration.between(currentTime, reservationTime);
-        long diff = Math.abs(duration.toMinutes());
+        long difference = Math.abs(duration.toMinutes());
 
         try {
             if (currentReservation != null) {
                 if (currentButton == btnAbsent) {
 
-                    if (diff >=5 && diff <11) {
+                    if (difference >=5 && difference <11) {
                         reservationQueue.add(currentReservation);
                         btnAbsent.setEnabled(false);
                         btnPresent.setEnabled(false);
@@ -51,7 +51,7 @@ public class Reservation extends JFrame implements ActionListener {
 
                 } else {
 
-                    if(diff >=5 && diff <11) {
+                    if(difference >=5 && difference <11) {
                     // reservationQueue.add(currentReservation);
                         btnPresent.setEnabled(false);
                         btnAbsent.setEnabled(false);
@@ -121,6 +121,8 @@ public class Reservation extends JFrame implements ActionListener {
           System.exit(0);
         }
     }
+
+
 
 
 
