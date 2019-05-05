@@ -7,8 +7,10 @@ public class Reservation {
     private JButton btnPresent;
     private JPanel reservationPanel;
     private JButton btnAbsent;
+    private static Queue<ReservationData> reservationQueue;
 
     public Reservation() {
+        reservationQueue = new LinkedList<>();
         btnPresent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -20,7 +22,8 @@ public class Reservation {
     public static void main(String [] args)
     {
         Reservation reservation = new Reservation();
-       List<ReservationData> resData = reservation.getDummyReservations(0,4);
+        List<ReservationData> resData = reservation.getDummyReservations(0,4);
+        populateQueue(resData);
         JFrame frame = new JFrame("Reservation");
         frame.setContentPane(new Reservation().reservationPanel);
         frame.setVisible(true);
@@ -42,12 +45,20 @@ public class Reservation {
             rs.question = "This is the sample question" + i ;
             rs.status = Status.PRESENT;
             rs.student = new Student("student_" + i + "@buffalo.edu", null);
+            reservationList.add(rs);
 
 
         }
 
 
         return reservationList;
+    }
+
+    private static void populateQueue(List<ReservationData> reservationList)
+    {
+        for(ReservationData currentReservation: reservationList){
+            reservationQueue.add(currentReservation);
+        }
     }
 
 
