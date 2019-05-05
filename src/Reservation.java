@@ -54,11 +54,28 @@ public class Reservation {
         return reservationList;
     }
 
+<<<<<<< HEAD
     private static void populateQueue(List<ReservationData> reservationList)
     {
         for(ReservationData currentReservation: reservationList){
             reservationQueue.add(currentReservation);
         }
+=======
+    private Date getReservationTime() {
+        
+        
+        Calendar reservationTime = Calendar.getInstance();
+        
+        Random random = new Random();
+        
+        // reservation time 5 minustes before current time
+        if(random.nextBoolean()) reservationTime.add(Calendar.MINUTE, -5);
+        // reservation time 11 minustes before current time
+        else reservationTime.add(Calendar.MINUTE, -11);
+
+        
+        return reservationTime.getTime();
+>>>>>>> 3a38db018aebc7746854ae5fc1bbdd103784487d
     }
 
 
