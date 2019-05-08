@@ -2,10 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.ZoneId;
 import java.util.*;
 import java.util.List;
@@ -17,11 +15,12 @@ public class Reservation extends JFrame implements ActionListener {
     private  JButton btnPresent;
     private   JPanel reservationPanel;
     private  JButton btnAbsent;
-    private    JTextArea reservationText;
+    private  JTextArea reservationText;
     private  Container reservationContainer;
     private  static Queue<ReservationData> reservationQueue;
     private  JScrollPane jsp;
     private static ReservationData currentReservation;
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -43,9 +42,11 @@ public class Reservation extends JFrame implements ActionListener {
                         btnAbsent.setEnabled(false);
                         btnPresent.setEnabled(false);
                         JOptionPane.showMessageDialog(null, "Reservation added to the back the queue");
+                        this.setVisible(false);
                         PrintQueue(reservationQueue);
                     } else {
                         JOptionPane.showMessageDialog(btnAbsent, " The current student is blocked");
+                        this.setVisible(false);
                         PrintQueue(reservationQueue);
                     }
 
@@ -55,12 +56,15 @@ public class Reservation extends JFrame implements ActionListener {
                     // reservationQueue.add(currentReservation);
                         btnPresent.setEnabled(false);
                         btnAbsent.setEnabled(false);
+                        this.setVisible(false);
                         PrintQueue(reservationQueue);
                     } else {
 
-                        JOptionPane.showMessageDialog(btnAbsent, " The current student is blocked");
+                      //  JOptionPane.showMessageDialog(btnAbsent, " The current student is blocked");
                         btnPresent.setEnabled(false);
                         btnAbsent.setEnabled(false);
+                        this.setVisible(false);
+
                         PrintQueue(reservationQueue);
                     }
 
@@ -92,7 +96,6 @@ public class Reservation extends JFrame implements ActionListener {
         btnAbsent.addActionListener(this);
         btnPresent.addActionListener(this);
 
-
     }
 
     public static void main(String [] args)
@@ -123,11 +126,7 @@ public class Reservation extends JFrame implements ActionListener {
     }
 
 
-
-
-
     //UTILITY FUNCTIONS START HERE
-
 
 
     /* This function sets the text of the TextArea.
@@ -199,7 +198,7 @@ public class Reservation extends JFrame implements ActionListener {
       This function iterates over the elements of queue and print it in a specific order.
       @param - Queue whose eleents are to be printed.
      */
-     private void PrintQueue( Queue<ReservationData> toBePrintedQueue)
+    private void PrintQueue( Queue<ReservationData> toBePrintedQueue)
      {
          JFrame queueFrame = new JFrame();
          JTextArea queueText = new JTextArea();
