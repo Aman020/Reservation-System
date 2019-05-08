@@ -82,19 +82,26 @@ public class Reservation extends JFrame implements ActionListener {
 
     //Constructor
     public Reservation() {
-        reservationQueue = new LinkedList<>();
-        reservationText = new JTextArea(10,20);
-        reservationText.setEditable(false);
-        jsp = new JScrollPane(reservationText);
-        jsp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        reservationContainer = getContentPane();
-        reservationContainer.setLayout(new FlowLayout());
-        reservationContainer.add(btnAbsent);
-        reservationContainer.add(btnPresent);
-        reservationContainer.add(reservationText);
-        reservationContainer.add(jsp);
-        btnAbsent.addActionListener(this);
-        btnPresent.addActionListener(this);
+        
+    	btnPresent = new JButton();
+    	btnPresent.setText("Present");
+    	reservationPanel = new JPanel();
+    	btnAbsent  = new JButton();
+    	btnAbsent.setText("Absent");
+
+    	reservationQueue = new LinkedList<>();
+    	reservationText = new JTextArea(10,20);
+    	reservationText.setEditable(false);
+    	jsp = new JScrollPane(reservationText);
+    	jsp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    	reservationContainer = getContentPane();
+    	reservationContainer.setLayout(new FlowLayout());
+    	reservationContainer.add(btnAbsent);
+    	reservationContainer.add(btnPresent);
+    	reservationContainer.add(reservationText);
+    	reservationContainer.add(jsp);
+    	btnAbsent.addActionListener(this);
+    	btnPresent.addActionListener(this);
 
     }
 
