@@ -25,7 +25,6 @@ public class Reservation extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Component currentButton =  (JButton)e.getSource();
-       // Date reservationTime = currentReservation.startTime;
 
         LocalDateTime currentTime = LocalDateTime.now();
         LocalDateTime reservationTime = LocalDateTime.ofInstant(  currentReservation.startTime.toInstant(), ZoneId.systemDefault());
@@ -45,7 +44,7 @@ public class Reservation extends JFrame implements ActionListener {
                         this.setVisible(false);
                         PrintQueue(reservationQueue);
                     } else {
-                        JOptionPane.showMessageDialog(btnAbsent, " The current student is blocked");
+                        JOptionPane.showMessageDialog(btnAbsent, " The current student is banned");
                         this.setVisible(false);
                         PrintQueue(reservationQueue);
                     }
@@ -218,7 +217,7 @@ public class Reservation extends JFrame implements ActionListener {
          StringBuilder sb = new StringBuilder();
          if( toBePrintedQueue.size() == 0)
          {
-             queueText.setText("There was only 1 appointment which was removed recently");
+             queueText.setText("No appointment in Queue");
 
          }
          else {
