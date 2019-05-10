@@ -1,3 +1,4 @@
+package reservation;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -159,7 +160,10 @@ public class Reservation extends JFrame implements ActionListener {
             ReservationData rs = new ReservationData();
             rs.isPresent = true;
             rs.reservationId = i;
-            rs.question = "This is the sample question" + i ;
+            if(i%2==1) {
+            	rs.question = "This is the sample question" + i ;
+            }
+            
             rs.status = Status.PRESENT;
             rs.student = new Student("student_" + i + "@buffalo.edu", null);
             rs.startTime = getReservationTime();
@@ -223,7 +227,12 @@ public class Reservation extends JFrame implements ActionListener {
          else {
              while (!toBePrintedQueue.isEmpty()) {
                  ReservationData currentReservation = toBePrintedQueue.poll();
-                 sb.append("Reservation Id - " + currentReservation.reservationId + "\n " + "Start Time -" + currentReservation.startTime + "\n" + "Student Id-" + currentReservation.student.emailId + "\n" + "Question-" + currentReservation.question);
+                 sb.append("Reservation Id - " + currentReservation.reservationId + "\n " + "Start Time -" + currentReservation.startTime + "\n" + "Student Id-" + currentReservation.student.emailId + "\n" );
+                
+                 if(currentReservation.question!=null) {
+                	 sb.append("Question-" + currentReservation.question+"\n\n");
+                 }
+                 else {
                  sb.append("\n\n");
              }
              queueText.setText(sb.toString());
@@ -234,6 +243,4 @@ public class Reservation extends JFrame implements ActionListener {
      }
 
 
-}
-
-
+}}
