@@ -1,14 +1,22 @@
 package edu.buffalo;
-import javax.swing.*;
-import java.awt.*;
+
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.*;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Queue;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 
 public class ReservationDriver extends JFrame implements ActionListener {
 
@@ -19,8 +27,7 @@ public class ReservationDriver extends JFrame implements ActionListener {
 	private Container reservationContainer;
 	private static Queue<Reservation> reservationQueue;
 	private JScrollPane jsp;
-	
-	
+
 	public ReservationDriver() {
 
 		btnPresent = new JButton();
@@ -30,10 +37,10 @@ public class ReservationDriver extends JFrame implements ActionListener {
 
 		reservationText = new JTextArea(10, 20);
 		reservationText.setEditable(false);
-		
+
 		jsp = new JScrollPane(reservationText);
 		jsp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		
+
 		reservationContainer = getContentPane();
 		reservationContainer.setLayout(new FlowLayout());
 		reservationContainer.add(btnAbsent);
@@ -42,98 +49,80 @@ public class ReservationDriver extends JFrame implements ActionListener {
 		reservationContainer.add(jsp);
 		btnAbsent.addActionListener(this);
 		btnPresent.addActionListener(this);
-		
-		
+
 		reservationQueue = new LinkedList<>();
 
 	}
 
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		Component currentButton = (JButton) e.getSource();
 
 		Reservation currentReservation = reservationQueue.peek();
-		
+
 		try {
-			
+
 			if (currentReservation != null) {
-				
-				if (currentButton == btnAbsent) reservationQueue = markHeadAsAbsent(reservationQueue);
-				else reservationQueue = markHeadAsPresent(reservationQueue);
+
+				if (currentButton == btnAbsent)
+					reservationQueue = markHeadAsAbsent(reservationQueue);
+				else
+					reservationQueue = markHeadAsPresent(reservationQueue);
+				PrintQueue(reservationQueue);
 
 			} else {
-				
+
 				JOptionPane.showMessageDialog(null, " There are not appointments at present");
 			}
-			
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
 	}
 
-
 	public Queue<Reservation> markHeadAsAbsent(Queue<Reservation> localReservationQueue) {
-		
+
 		Reservation currentReservation = localReservationQueue.poll();
 		LocalDateTime currentTime = LocalDateTime.now();
 		LocalDateTime reservationTime = LocalDateTime.ofInstant(currentReservation.getStartTime().toInstant(),
 				ZoneId.systemDefault());
-		
+
 		Duration duration = Duration.between(currentTime, reservationTime);
 		long difference = Math.abs(duration.toMinutes());
 
-			
 		if (difference >= 5 && difference < 11) {
-			
-			reservationQueue.add(currentReservation);
+
+			localReservationQueue.add(currentReservation);
 			btnAbsent.setEnabled(false);
 			btnPresent.setEnabled(false);
 			JOptionPane.showMessageDialog(null, "Reservation added to the back the queue");
 			this.setVisible(false);
-			PrintQueue(reservationQueue);
-			
+
 		} else {
-			
+
 			JOptionPane.showMessageDialog(btnAbsent, " The current student is banned");
 			this.setVisible(false);
-			PrintQueue(reservationQueue);
 		}
 
-		
 		return localReservationQueue;
-		
-		
+
 	}
-	
+
 	public Queue<Reservation> markHeadAsPresent(Queue<Reservation> localReservationQueue) {
-		
+
 		Reservation currentReservation = localReservationQueue.poll();
-		
-	
+
+		currentReservation.setStatus(Status.PRESENT);
+
 		btnPresent.setEnabled(false);
 		btnAbsent.setEnabled(false);
 		this.setVisible(false);
-		PrintQueue(reservationQueue);
-		
+
 		return localReservationQueue;
 
 	}
-
-
-
-
-	/*
-	 * This function populates the queue with dummy reservations.
-	 * 
-	 * @param reservationList - The list of reservations.
-	 */
-	private static void populateQueue(List<Reservation> reservationList) {
-		reservationQueue.addAll(reservationList);
-	}
-
 
 	/*
 	 * This function iterates over the elements of queue and print it in a specific
@@ -142,7 +131,7 @@ public class ReservationDriver extends JFrame implements ActionListener {
 	 * @param - Queue whose eleents are to be printed.
 	 */
 	private void PrintQueue(Queue<Reservation> toBePrintedQueue) {
-		
+
 		JFrame queueFrame = new JFrame();
 		JTextArea queueText = new JTextArea();
 		queueText.setEditable(false);
@@ -158,31 +147,30 @@ public class ReservationDriver extends JFrame implements ActionListener {
 
 		} else {
 			while (!toBePrintedQueue.isEmpty()) {
-				Reservation currentReservation = toBePrintedQueue.poll();				
+				Reservation currentReservation = toBePrintedQueue.poll();
 				sb.append(currentReservation.showReservation());
 				sb.append("\n\n");
 			}
-			
+
 			queueText.setText(sb.toString());
 		}
 
 	}
-	
-	
+
 	public static void main(String[] args) {
 
 		ReservationDriver reservationDriver = new ReservationDriver();
-		
+
 		GenerateReservations geReservations = new GenerateReservations();
-		
-		populateQueue(geReservations.getGeneratedData(0, 4));
+
+		reservationQueue.addAll(geReservations.getGeneratedData(0, 4));
 
 		Reservation currentReservation = reservationQueue.peek();
 
 		if (currentReservation != null) {
 
 			// queue has at least one appointment
-			
+
 			reservationText.setText(currentReservation.showReservation());
 
 			reservationDriver.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
