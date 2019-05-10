@@ -22,14 +22,17 @@ public class GenerateReservations {
 
 		List<Reservation> reservationList = new ArrayList<>();
 		for (int i = 1; i <= randomNo; i++) {
+			
+			
+			//TODO: fix it
 			Reservation rs = new Reservation();
-			rs.setPresent(true);
+
 			rs.setReservationId(i);
 			if (i % 2 == 1) {
 				rs.setQuestion("This is the sample question" + i);
 			}
 
-			rs.setStatus(Status.PRESENT);
+			rs.setStatus(Status.ABSENT);
 			rs.setStudent(new Student("student_" + i + "@buffalo.edu", null));
 			rs.setStartTime(generateReservationTime());
 			

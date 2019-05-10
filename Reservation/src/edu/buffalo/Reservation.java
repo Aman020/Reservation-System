@@ -13,9 +13,17 @@ public class Reservation {
     private Student student;
     private String question;
     private Status status;
-    private boolean isPresent;
+
+    public Reservation() {}
     
-    
+	public Reservation(int reservationId, Date startTime, Student student, String question) {
+		super();
+		this.reservationId = reservationId;
+		this.startTime = startTime;
+		this.student = student;
+		this.question = question;
+		this.status = Status.ABSENT;
+	}
 	public int getReservationId() {
 		return reservationId;
 	}
@@ -46,13 +54,39 @@ public class Reservation {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-	public boolean isPresent() {
-		return isPresent;
-	}
-	public void setPresent(boolean isPresent) {
-		this.isPresent = isPresent;
-	}
 	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Reservation other = (Reservation) obj;
+		if (question == null) {
+			if (other.question != null)
+				return false;
+		} else if (!question.equals(other.question))
+			return false;
+		if (reservationId != other.reservationId)
+			return false;
+		if (startTime == null) {
+			if (other.startTime != null)
+				return false;
+		} else if (!startTime.equals(other.startTime))
+			return false;
+		if (status != other.status)
+			return false;
+		if (student == null) {
+			if (other.student != null)
+				return false;
+		} else if (!student.equals(other.student))
+			return false;
+		return true;
+	}
+
 	public String showReservation() {
 		
 		String res = "ReservationId: " + reservationId + "\n"

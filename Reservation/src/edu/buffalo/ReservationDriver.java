@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
 import java.util.List;
+import java.util.Queue;
 
 public class ReservationDriver extends JFrame implements ActionListener {
 
@@ -53,14 +54,14 @@ public class ReservationDriver extends JFrame implements ActionListener {
 		
 		Component currentButton = (JButton) e.getSource();
 
-		Reservation currentReservation = getAndRemoveFirstReservationFromQueue();
+		Reservation currentReservation = reservationQueue.peek();
 		
 		try {
 			
 			if (currentReservation != null) {
 				
-				if (currentButton == btnAbsent) markAsAbsent(currentReservation);
-				else markAsPresent();
+				if (currentButton == btnAbsent) reservationQueue = markHeadAsAbsent(reservationQueue);
+				else reservationQueue = markHeadAsPresent(reservationQueue);
 
 			} else {
 				
@@ -74,51 +75,50 @@ public class ReservationDriver extends JFrame implements ActionListener {
 	}
 
 
-	private boolean markAsAbsent(Reservation currentReservation) {
+	public Queue<Reservation> markHeadAsAbsent(Queue<Reservation> localReservationQueue) {
 		
+		Reservation currentReservation = localReservationQueue.poll();
 		LocalDateTime currentTime = LocalDateTime.now();
 		LocalDateTime reservationTime = LocalDateTime.ofInstant(currentReservation.getStartTime().toInstant(),
 				ZoneId.systemDefault());
 		
 		Duration duration = Duration.between(currentTime, reservationTime);
 		long difference = Math.abs(duration.toMinutes());
-		
-		try {
+
 			
-			if (difference >= 5 && difference < 11) {
-				
-				reservationQueue.add(currentReservation);
-				btnAbsent.setEnabled(false);
-				btnPresent.setEnabled(false);
-				JOptionPane.showMessageDialog(null, "Reservation added to the back the queue");
-				this.setVisible(false);
-				PrintQueue(reservationQueue);
-				
-			} else {
-				
-				JOptionPane.showMessageDialog(btnAbsent, " The current student is banned");
-				this.setVisible(false);
-				PrintQueue(reservationQueue);
-			}
-		} catch (HeadlessException e) {
+		if (difference >= 5 && difference < 11) {
 			
-			return false;
+			reservationQueue.add(currentReservation);
+			btnAbsent.setEnabled(false);
+			btnPresent.setEnabled(false);
+			JOptionPane.showMessageDialog(null, "Reservation added to the back the queue");
+			this.setVisible(false);
+			PrintQueue(reservationQueue);
 			
+		} else {
+			
+			JOptionPane.showMessageDialog(btnAbsent, " The current student is banned");
+			this.setVisible(false);
+			PrintQueue(reservationQueue);
 		}
+
 		
-		return true;
+		return localReservationQueue;
 		
 		
 	}
 	
-	private boolean markAsPresent() {
+	public Queue<Reservation> markHeadAsPresent(Queue<Reservation> localReservationQueue) {
 		
-			btnPresent.setEnabled(false);
-			btnAbsent.setEnabled(false);
-			this.setVisible(false);
-			PrintQueue(reservationQueue);
-			
-			return true;
+		Reservation currentReservation = localReservationQueue.poll();
+		
+	
+		btnPresent.setEnabled(false);
+		btnAbsent.setEnabled(false);
+		this.setVisible(false);
+		PrintQueue(reservationQueue);
+		
+		return localReservationQueue;
 
 	}
 
@@ -133,34 +133,6 @@ public class ReservationDriver extends JFrame implements ActionListener {
 	private static void populateQueue(List<Reservation> reservationList) {
 		reservationQueue.addAll(reservationList);
 	}
-
-	/*
-	 * This function returns the size of current queue
-	 * 
-	 * @param none
-	 */
-	private static int getQueueSize() {
-		return reservationQueue.size();
-	}
-
-	/*
-	 * This function returns the first reservation from the queue
-	 * 
-	 * @param none
-	 */
-	private static Reservation getFirstReservationFromQueue() {
-		return reservationQueue.peek();
-	}
-	
-	/*
-	 * This function returns the first reservation from the queue and removes it
-	 * 
-	 * @param none
-	 */
-	private static Reservation getAndRemoveFirstReservationFromQueue() {
-		return reservationQueue.poll();
-	}
-
 
 
 	/*
@@ -205,7 +177,7 @@ public class ReservationDriver extends JFrame implements ActionListener {
 		
 		populateQueue(geReservations.getGeneratedData(0, 4));
 
-		Reservation currentReservation = getFirstReservationFromQueue();
+		Reservation currentReservation = reservationQueue.peek();
 
 		if (currentReservation != null) {
 
