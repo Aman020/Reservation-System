@@ -29,7 +29,7 @@ public class ReservationDriverTest {
 		
 		int previousQueueSize = reservationQueue.size();
 
-		Queue<Reservation> returnQueue = driver.markHeadAsAbsent(reservationQueue);
+		Queue<Reservation> returnQueue = driver.markHeadAsAbsent(reservationQueue, false);
 
 		assertEquals(returnQueue.contains(reservation1), false);
 		assertEquals(returnQueue.size(), previousQueueSize-1);
@@ -45,7 +45,7 @@ public class ReservationDriverTest {
 
 		reservationQueue.add(reservation1);
 
-		Queue<Reservation> returnQueue = driver.markHeadAsAbsent(reservationQueue);
+		Queue<Reservation> returnQueue = driver.markHeadAsAbsent(reservationQueue, false);
 
 		assertEquals(returnQueue.size(), 0);
 
@@ -60,7 +60,7 @@ public class ReservationDriverTest {
 
 		reservationQueue.add(reservation1);
 
-		Queue<Reservation> returnQueue = driver.markHeadAsAbsent(reservationQueue);
+		Queue<Reservation> returnQueue = driver.markHeadAsAbsent(reservationQueue, false);
 
 		assertEquals(returnQueue.contains(reservation1), true);
 		assertEquals(returnQueue.size(), 1);
@@ -80,7 +80,7 @@ public class ReservationDriverTest {
 		
 		Reservation headOfOriginalQueue = reservationQueue.peek();
 
-		Queue<Reservation> returnQueue = driver.markHeadAsAbsent(reservationQueue);
+		Queue<Reservation> returnQueue = driver.markHeadAsAbsent(reservationQueue, false);
 		
 		
 		Reservation resAtTail = new Reservation();
