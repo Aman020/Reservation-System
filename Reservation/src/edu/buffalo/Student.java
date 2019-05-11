@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  *The Student class is a worker class that encapsulates student related information.
- * @author 	Meghana,Prabhleen,Aman,Amlan,Deboshree
+ * @author 	Meghana, Prabhleen, Aman, Amlan, Deboshree
  * @version	1.0
  * @since	2019-05-03
  */

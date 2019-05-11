@@ -12,7 +12,7 @@ enum Status
 
 /**
  *The Reservation class is a worker class that holds and provides the information of a specific reservation.
- * @author 	Aman,Amlan,Deboshree, Meghana, Prabhleen
+ * @author 	Aman, Amlan, Deboshree, Meghana, Prabhleen
  * @version	1.0
  * @since	2019-05-04
  */

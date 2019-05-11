@@ -8,7 +8,7 @@ import java.util.Random;
 
 /**
  *The GenerateReservations class simply generates random number of reservations and the reservation times for various cases
- * @author 	Prabhleen,Aman,Amlan,Deboshree,Meghana
+ * @author 	Prabhleen, Aman, Amlan, Deboshree, Meghana
  * @version	1.0
  * @since	2019-05-04
  */

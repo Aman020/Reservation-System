@@ -19,14 +19,14 @@ import javax.swing.JTextArea;
 
 /**
  *The ReservationDriver class handles various operations that can be performed on a specific reservation.
- * @author 	Amlan,Aman,Deboshree, Meghana, Prabhleen
+ * @author 	Amlan, Aman, Deboshree, Meghana, Prabhleen
  * @version	1.0
  * @since	2019-05-02
  */
 
 public class ReservationDriver extends JFrame implements ActionListener {
 
-	// Declaring private variables
+
 	private JButton btnPresent;
 	private JButton btnAbsent;
 	private static JTextArea reservationText;
