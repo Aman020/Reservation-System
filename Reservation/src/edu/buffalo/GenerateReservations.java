@@ -5,13 +5,20 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+
+/**
+ *The GenerateReservations class simply generates random number of reservations and the reservation times for various cases
+ * @author 	Prabhleen, Aman, Amlan, Deboshree, Meghana
+ * @version	1.0
+ * @since	2019-05-04
+ */
+
 public class GenerateReservations {
 	
 	/**
 	 * This method generates the random number of dummy reservations.
-	 * 
+	 *
 	 * @param minimum - The minimum number of reservations to be generated.
-	 * 
 	 * @param maximum - The maximum number of reservations to be generated.
 	 * @return - This method returns Reservation List
 	 */

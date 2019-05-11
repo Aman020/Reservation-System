@@ -9,6 +9,13 @@ import java.util.Queue;
 
 import org.junit.Test;
 
+/**
+ *The ReservationDriverTest class is a test class validates the methods in Reservation class
+ * @author 	Deboshree, Meghana, Aman, Amlan, Prabhleen
+ * @version	1.0
+ * @since	2019-05-03
+ */
+
 public class ReservationDriverTest {
 
 	ReservationDriver driver = new ReservationDriver();

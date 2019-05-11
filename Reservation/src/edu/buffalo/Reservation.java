@@ -1,10 +1,21 @@
 package edu.buffalo;
 import java.util.Date;
 
+
+
+//Enum to mark the reservations's status as either ABSENT and PRESENT
 enum Status
 {
     ABSENT, PRESENT
 }
+
+
+/**
+ *The Reservation class is a worker class that holds and provides the information of a specific reservation.
+ * @author 	Aman, Amlan, Deboshree, Meghana, Prabhleen
+ * @version	1.0
+ * @since	2019-05-04
+ */
 
 public class Reservation {
 
@@ -24,38 +35,48 @@ public class Reservation {
 		this.question = question;
 		this.status = Status.ABSENT;
 	}
+	//Get the reservation id.
 	public int getReservationId() {
 		return reservationId;
 	}
+	//Set the reservation id.
 	public void setReservationId(int reservationId) {
-		this.reservationId = reservationId;
-	}
+		this.reservationId = reservationId; }
+	//Return the start time of the reservation
 	public Date getStartTime() {
 		return startTime;
 	}
+	//Set the start time of the reservation
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
+	//Get the student's information
 	public Student getStudent() {
 		return student;
 	}
+	//Set the student's information
 	public void setStudent(Student student) {
 		this.student = student;
 	}
+	//Get the question
 	public String getQuestion() {
 		return question;
 	}
+	//Set the question
 	public void setQuestion(String question) {
 		this.question = question;
 	}
+	//Get the status of the appointment
 	public Status getStatus() {
 		return status;
 	}
+	//Set the status of the appointment
 	public void setStatus(Status status) {
 		this.status = status;
 	}
 	
 
+	//Overridden method to customize the predefined function
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

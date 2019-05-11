@@ -16,9 +16,17 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
+
+/**
+ *The ReservationDriver class handles various operations that can be performed on a specific reservation.
+ * @author 	Amlan, Aman, Deboshree, Meghana, Prabhleen
+ * @version	1.0
+ * @since	2019-05-02
+ */
+
 public class ReservationDriver extends JFrame implements ActionListener {
 
-	// Declaring private variables
+
 	private JButton btnPresent;
 	private JButton btnAbsent;
 	private static JTextArea reservationText;
@@ -52,6 +60,7 @@ public class ReservationDriver extends JFrame implements ActionListener {
 	 * This method is required by ActionListener. It will be called an user clicks on the button
 	 * 
 	 * @param e Action event that has just been triggered.
+	 * @return - NA
 	 */
 
 	@Override
@@ -146,7 +155,8 @@ public class ReservationDriver extends JFrame implements ActionListener {
 	/**
 	 * This method PrintQueue will print the current queue
 	 * 
-	 * @param - toBePrintedQueue - This will take the updated queue that is to be printed. 
+	 * @param - toBePrintedQueue - This will take the updated queue that is to be printed.
+	 * @reutn - NA
 	 */
 	
 	private void PrintQueue(Queue<Reservation> toBePrintedQueue) {
@@ -180,32 +190,24 @@ public class ReservationDriver extends JFrame implements ActionListener {
 	 * This method initiates the application
 	 *
 	 * @param args Command-line arguments which we will ignore.
+	 * @return - NA
 	 */
 
 	public static void main(String[] args) {
 
 		ReservationDriver reservationDriver = new ReservationDriver();
-
 		GenerateReservations geReservations = new GenerateReservations();
-
 		reservationQueue.addAll(geReservations.getGeneratedData(0, 4));
-
 		Reservation currentReservation = reservationQueue.peek();
-
 		if (currentReservation != null) {
-
 			// queue has at least one appointment
-
 			reservationText.setText(currentReservation.showReservation());
-
 			reservationDriver.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			reservationDriver.setBounds(300, 100, 300, 150);
 			reservationDriver.setSize(600, 600);
 			reservationDriver.setVisible(true);
 		} else {
-
 			// no appointments in the queue
-
 			reservationDriver.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			reservationDriver.setBounds(300, 100, 300, 150);
 			reservationDriver.setSize(600, 600);
