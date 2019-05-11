@@ -3,7 +3,7 @@ import java.util.Date;
 
 
 
-//Enum to mark the student's status as either ABSENT and PRESENT
+//Enum to mark the reservations's status as either ABSENT and PRESENT
 enum Status
 {
     ABSENT, PRESENT
