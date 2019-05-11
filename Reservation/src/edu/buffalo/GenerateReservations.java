@@ -47,21 +47,32 @@ public class GenerateReservations {
 	
 	
 	/**
-	 * This function generates reservation times for 2 following cases. 1. 5 minutes
-	 * before the current time. 2. 11 minutes before the current time.
+	 * This function generates reservation times for 3 following cases. 
+	 * 1. current time
+	 * 2. 5 minutes before the current time. 
+	 * 3. 11 minutes before the current time.
 	 * 
-	 * @param - NA
-	 * @return - Time which is 5 mins before the current time or 11 mins before the current time. 
+	 * @return - Time which is current time or 5 mins before the current time or 11 mins before the current time. 
 	 */
 	private Date generateReservationTime() {
-		Calendar reservationTime = Calendar.getInstance();
+		
 		Random random = new Random();
+		
+		// generates a random flag of either 0,1,2
+		int flag = random.nextInt(3);
+		
+		// default reservation time is current time
+		Calendar reservationTime = Calendar.getInstance();
+		
+
 		// reservation time 5 minustes before current time
-		if (!random.nextBoolean())
+		if (flag==1)
 			reservationTime.add(Calendar.MINUTE, -5);
 		// reservation time 11 minustes before current time
-		else
+		else if (flag==2)
 			reservationTime.add(Calendar.MINUTE, -11);
+		
+		
 		return reservationTime.getTime();
 
 	}

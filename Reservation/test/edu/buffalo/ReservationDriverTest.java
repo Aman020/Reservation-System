@@ -94,7 +94,7 @@ public class ReservationDriverTest {
 
 		reservationQueue = new LinkedList<Reservation>();
 
-		Reservation reservation1 = new Reservation(1, getTimeBefore(5), generateStudent(1), generateQuestion(1));
+		Reservation reservation1 = new Reservation(1, getTimeBefore(0), generateStudent(1), generateQuestion(1));
 		Reservation reservation2 = new Reservation(2, getTimeBefore(11), generateStudent(2), generateQuestion(2));
 
 		reservationQueue.add(reservation1);

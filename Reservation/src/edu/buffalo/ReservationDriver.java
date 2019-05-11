@@ -110,8 +110,8 @@ public class ReservationDriver extends JFrame implements ActionListener {
 		long difference = TimeUnit.MILLISECONDS.toMinutes(duration);
 	
 
-		if (difference >= 5 && difference < 11) {
-
+		if (difference < 10) {
+			
 			localReservationQueue.add(currentReservation);
 			btnAbsent.setEnabled(false);
 			btnPresent.setEnabled(false);
@@ -119,7 +119,7 @@ public class ReservationDriver extends JFrame implements ActionListener {
 			this.setVisible(false);
 
 		} else {
-
+			currentReservation.setStatus(Status.ABSENT);
 			currentReservation.getStudent().setBanStartDate(currentTime);
 			if(shouldShowPopup) JOptionPane.showMessageDialog(btnAbsent, "The current student is banned");
 			this.setVisible(false);
