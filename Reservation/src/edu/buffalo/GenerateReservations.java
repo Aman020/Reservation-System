@@ -7,12 +7,13 @@ import java.util.Random;
 
 public class GenerateReservations {
 	
-	/*
+	/**
 	 * This method generates the random number of dummy reservations.
 	 * 
 	 * @param minimum - The minimum number of reservations to be generated.
 	 * 
 	 * @param maximum - The maximum number of reservations to be generated.
+	 * @return - This method returns Reservation List
 	 */
 	
 	public List<Reservation> getGeneratedData(int minimum, int maximum) {
@@ -45,11 +46,12 @@ public class GenerateReservations {
 	}
 	
 	
-	/*
+	/**
 	 * This function generates reservation times for 2 following cases. 1. 5 minutes
 	 * before the current time. 2. 11 minutes before the current time.
 	 * 
 	 * @param - NA
+	 * @return - Time which is 5 mins before the current time or 11 mins before the current time. 
 	 */
 	private Date generateReservationTime() {
 		Calendar reservationTime = Calendar.getInstance();

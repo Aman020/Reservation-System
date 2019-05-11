@@ -53,6 +53,12 @@ public class ReservationDriver extends JFrame implements ActionListener {
 		reservationQueue = new LinkedList<>();
 
 	}
+	
+	/**
+	 * This method is required by ActionListener. It will be called an user clicks on the button
+	 * 
+	 * @param e Action event that has just been triggered.
+	 */
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -81,6 +87,13 @@ public class ReservationDriver extends JFrame implements ActionListener {
 		}
 
 	}
+	
+	/**
+	 * This method markHeadAsAbsent will mark the head of the queue as Absent.
+	 * 
+	 * @param - localReservationQueue-  takes the head of the current queue 
+	 * @param - shouldShowPopup-  a flag to determine if UI components should execute on not.
+	 * @return - localReservationQueue - This returns the updated queue */
 
 	public Queue<Reservation> markHeadAsAbsent(Queue<Reservation> localReservationQueue, boolean shouldShowPopup) {
 
@@ -115,6 +128,12 @@ public class ReservationDriver extends JFrame implements ActionListener {
 		return localReservationQueue;
 
 	}
+	
+	/**
+	 * This method markHeadAsAbsent will mark the head of the queue as Present.
+	 * 
+	 * @param - localReservationQueue-  takes the head of the current queue 
+	 * @return - localReservationQueue - This returns the updated queue */
 
 	public Queue<Reservation> markHeadAsPresent(Queue<Reservation> localReservationQueue) {
 
@@ -130,12 +149,12 @@ public class ReservationDriver extends JFrame implements ActionListener {
 
 	}
 
-	/*
-	 * This function iterates over the elements of queue and print it in a specific
-	 * order.
+	/**
+	 * This method PrintQueue will print the current queue
 	 * 
-	 * @param - Queue whose eleents are to be printed.
+	 * @param - toBePrintedQueue - This will take the updated queue that is to be printed. 
 	 */
+	
 	private void PrintQueue(Queue<Reservation> toBePrintedQueue) {
 
 		JFrame queueFrame = new JFrame();
@@ -162,6 +181,12 @@ public class ReservationDriver extends JFrame implements ActionListener {
 		}
 
 	}
+	
+	/**
+	 * This method initiates the application
+	 *
+	 * @param args Command-line arguments which we will ignore.
+	 */
 
 	public static void main(String[] args) {
 

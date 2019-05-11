@@ -14,6 +14,12 @@ public class ReservationDriverTest {
 	ReservationDriver driver = new ReservationDriver();
 	Queue<Reservation> reservationQueue;
 
+	
+	/**
+	 * This test case will test the queue if there are multiple entries when the student is banned. 
+	 * 
+	 */
+	
 	@Test
 	public void testQueueWithMultipleEntriesWhenStudentIsBanned() {
 
@@ -35,6 +41,11 @@ public class ReservationDriverTest {
 		assertEquals(returnQueue.size(), previousQueueSize-1);
 
 	}
+	
+	/**
+	 * This test case will test the queue if there is Single entry when the student is banned. 
+	 * 
+	 */
 
 	@Test
 	public void testQueueWithSingleEntryWhenStudentIsBanned() {
@@ -51,6 +62,12 @@ public class ReservationDriverTest {
 
 	}
 
+	/**
+	 * This test case will test the queue if there is single entry when the student is re-added at the end
+	 * 
+	 */
+	
+	
 	@Test
 	public void testQueueWithSingleEntryWhenStudentReaddedAtEnd() {
 
@@ -67,6 +84,11 @@ public class ReservationDriverTest {
 
 	}
 
+	/**
+	 * This test case will test the queue if there are single entry when the student is re-added at the end
+	 * 
+	 */
+	
 	@Test
 	public void testQueueWithMultipleEntriesWhenStudentReaddedAtEnd() {
 
@@ -90,25 +112,45 @@ public class ReservationDriverTest {
 			
 		}
 		
-	
 		assertEquals(returnQueue.size(), 2);
 		assertEquals(resAtTail, headOfOriginalQueue);
 
 
 	}
 
+	/**
+	 * This method generates student Object
+	 * 
+	 * @param an integer to distinguish between students
+	 * @return the generated student
+	 * 
+	 */
 	private Student generateStudent(int i) {
 
 		return new Student("student_" + i + "@buffalo.edu", null);
 
 	}
 
+	/**
+	 * This method generates a sample question
+	 * 
+	 * @param an integer to distinguish between students
+	 * @return the generated question
+	 * 
+	 */
 	private String generateQuestion(int i) {
 
 		return "this is a question " + i;
 
 	}
 
+	/**
+	 * This method generates a start time of a reservation
+	 * 
+	 * @param an integer to substract minutes from current time
+	 * @return the calculated time
+	 * 
+	 */
 	private Date getTimeBefore(int minutes) {
 
 		Calendar reservationTime = Calendar.getInstance();

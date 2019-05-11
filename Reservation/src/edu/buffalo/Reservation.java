@@ -86,6 +86,13 @@ public class Reservation {
 			return false;
 		return true;
 	}
+	
+	
+	/**
+	 * This function showReservation will show the reservation details like reservation ID,Start time and student's Email ID.
+	 * 
+	 * @param - NA	 
+	 * @return - This returns a string which contains the reservation details*/
 
 	public String showReservation() {
 		
