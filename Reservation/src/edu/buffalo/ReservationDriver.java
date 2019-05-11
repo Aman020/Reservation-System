@@ -14,9 +14,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
 
 public class ReservationDriver extends JFrame implements ActionListener {
 
@@ -26,7 +24,6 @@ public class ReservationDriver extends JFrame implements ActionListener {
 	private static JTextArea reservationText;
 	private Container reservationContainer;
 	private static Queue<Reservation> reservationQueue;
-	private JScrollPane jsp;
 
 	public ReservationDriver() {
 
@@ -38,15 +35,12 @@ public class ReservationDriver extends JFrame implements ActionListener {
 		reservationText = new JTextArea(10, 20);
 		reservationText.setEditable(false);
 
-		jsp = new JScrollPane(reservationText);
-		jsp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 		reservationContainer = getContentPane();
 		reservationContainer.setLayout(new FlowLayout());
 		reservationContainer.add(btnAbsent);
 		reservationContainer.add(btnPresent);
 		reservationContainer.add(reservationText);
-		reservationContainer.add(jsp);
 		btnAbsent.addActionListener(this);
 		btnPresent.addActionListener(this);
 
