@@ -5,11 +5,11 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -53,6 +53,12 @@ public class ReservationDriver extends JFrame implements ActionListener {
 		reservationQueue = new LinkedList<>();
 
 	}
+	
+	/**
+	 * This method is required by ActionListener. It will be called an user clicks on the button
+	 * 
+	 * @param e Action event that has just been triggered.
+	 */
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -66,7 +72,7 @@ public class ReservationDriver extends JFrame implements ActionListener {
 			if (currentReservation != null) {
 
 				if (currentButton == btnAbsent)
-					reservationQueue = markHeadAsAbsent(reservationQueue);
+					reservationQueue = markHeadAsAbsent(reservationQueue, true);
 				else
 					reservationQueue = markHeadAsPresent(reservationQueue);
 				PrintQueue(reservationQueue);
@@ -81,34 +87,53 @@ public class ReservationDriver extends JFrame implements ActionListener {
 		}
 
 	}
+	
+	/**
+	 * This method markHeadAsAbsent will mark the head of the queue as Absent.
+	 * 
+	 * @param - localReservationQueue-  takes the head of the current queue 
+	 * @param - shouldShowPopup-  a flag to determine if UI components should execute on not.
+	 * @return - localReservationQueue - This returns the updated queue */
 
-	public Queue<Reservation> markHeadAsAbsent(Queue<Reservation> localReservationQueue) {
+	public Queue<Reservation> markHeadAsAbsent(Queue<Reservation> localReservationQueue, boolean shouldShowPopup) {
 
 		Reservation currentReservation = localReservationQueue.poll();
-		LocalDateTime currentTime = LocalDateTime.now();
-		LocalDateTime reservationTime = LocalDateTime.ofInstant(currentReservation.getStartTime().toInstant(),
-				ZoneId.systemDefault());
-
-		Duration duration = Duration.between(currentTime, reservationTime);
-		long difference = Math.abs(duration.toMinutes());
+		
+		Calendar currentTimeCalender = Calendar.getInstance();
+		
+		Date currentTime = currentTimeCalender.getTime();
+		
+		Date reservationTime = currentReservation.getStartTime();
+		
+		long duration  = currentTime.getTime() - reservationTime.getTime();
+		
+		long difference = TimeUnit.MILLISECONDS.toMinutes(duration);
+	
 
 		if (difference >= 5 && difference < 11) {
 
 			localReservationQueue.add(currentReservation);
 			btnAbsent.setEnabled(false);
 			btnPresent.setEnabled(false);
-			JOptionPane.showMessageDialog(null, "Reservation added to the back the queue");
+			if(shouldShowPopup) JOptionPane.showMessageDialog(null, "Reservation added to the back the queue");
 			this.setVisible(false);
 
 		} else {
 
-			JOptionPane.showMessageDialog(btnAbsent, " The current student is banned");
+			currentReservation.getStudent().setBanStartDate(currentTime);
+			if(shouldShowPopup) JOptionPane.showMessageDialog(btnAbsent, "The current student is banned");
 			this.setVisible(false);
 		}
 
 		return localReservationQueue;
 
 	}
+	
+	/**
+	 * This method markHeadAsAbsent will mark the head of the queue as Present.
+	 * 
+	 * @param - localReservationQueue-  takes the head of the current queue 
+	 * @return - localReservationQueue - This returns the updated queue */
 
 	public Queue<Reservation> markHeadAsPresent(Queue<Reservation> localReservationQueue) {
 
@@ -124,12 +149,12 @@ public class ReservationDriver extends JFrame implements ActionListener {
 
 	}
 
-	/*
-	 * This function iterates over the elements of queue and print it in a specific
-	 * order.
+	/**
+	 * This method PrintQueue will print the current queue
 	 * 
-	 * @param - Queue whose eleents are to be printed.
+	 * @param - toBePrintedQueue - This will take the updated queue that is to be printed. 
 	 */
+	
 	private void PrintQueue(Queue<Reservation> toBePrintedQueue) {
 
 		JFrame queueFrame = new JFrame();
@@ -156,6 +181,12 @@ public class ReservationDriver extends JFrame implements ActionListener {
 		}
 
 	}
+	
+	/**
+	 * This method initiates the application
+	 *
+	 * @param args Command-line arguments which we will ignore.
+	 */
 
 	public static void main(String[] args) {
 
